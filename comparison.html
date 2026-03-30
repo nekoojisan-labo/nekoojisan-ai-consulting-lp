@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旧実装 vs v5.0 比較資料 | nekoojisan AI業務改善LP</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1a2744;
+      --orange: #e67e22;
+      --bg: #f8f9fa;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --border: #dee2e6;
+      --green: #27ae60;
+      --red: #c0392b;
+      --blue-light: #ebf5fb;
+      --white: #ffffff;
+      --radius: 0.5rem;
+      --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 15px; line-height: 1.7; color: var(--text);
+      background: var(--bg);
+    }
+
+    /* --- Header --- */
+    .doc-header {
+      background: var(--navy); color: var(--white);
+      padding: 3rem 1.5rem; text-align: center;
+    }
+    .doc-header__tag {
+      display: inline-block; background: var(--orange); color: var(--white);
+      font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.75rem;
+      border-radius: 1rem; margin-bottom: 1rem; letter-spacing: 0.05em;
+    }
+    .doc-header h1 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: 0.5rem; }
+    .doc-header p { font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+
+    /* --- Nav --- */
+    .doc-nav {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem; position: sticky; top: 0; z-index: 100;
+      overflow-x: auto; white-space: nowrap;
+    }
+    .doc-nav a {
+      display: inline-block; font-size: 0.8rem; color: var(--muted);
+      text-decoration: none; padding: 0.25rem 0.75rem; border-radius: 1rem;
+      transition: all 0.2s;
+    }
+    .doc-nav a:hover { background: var(--blue-light); color: var(--navy); }
+
+    /* --- Container --- */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* --- Section --- */
+    .section { padding: 3rem 0; }
+    .section:nth-child(even) { background: var(--white); }
+    .section__title {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 700;
+      margin-bottom: 0.5rem; color: var(--navy);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section__title-icon {
+      width: 32px; height: 32px; background: var(--orange); color: var(--white);
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+    }
+    .section__desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; }
+
+    /* --- Table --- */
+    .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .cmp-table th, .cmp-table td {
+      padding: 0.75rem 1rem; text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .cmp-table thead th {
+      background: var(--navy); color: var(--white);
+      font-weight: 700; font-size: 0.8rem; letter-spacing: 0.03em;
+      position: sticky; top: 44px;
+    }
+    .cmp-table thead th:first-child { border-radius: var(--radius) 0 0 0; }
+    .cmp-table thead th:last-child { border-radius: 0 var(--radius) 0 0; }
+    .cmp-table tbody tr:hover { background: var(--blue-light); }
+    .cmp-table .col-item { width: 22%; font-weight: 600; color: var(--navy); }
+    .cmp-table .col-old { width: 36%; }
+    .cmp-table .col-new { width: 42%; }
+
+    /* Tags */
+    .tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      padding: 0.15rem 0.5rem; border-radius: 0.25rem; margin-right: 0.25rem;
+      vertical-align: middle;
+    }
+    .tag--old { background: #fce4e4; color: var(--red); }
+    .tag--new { background: #d5f5e3; color: var(--green); }
+    .tag--none { background: #f0f0f0; color: var(--muted); }
+    .tag--same { background: #e8eaf6; color: #3f51b5; }
+
+    /* Code inline */
+    code {
+      background: #f0f0f0; padding: 0.1rem 0.35rem; border-radius: 0.2rem;
+      font-size: 0.8em; font-family: "SF Mono", Consolas, monospace;
+      word-break: break-all;
+    }
+    .new-highlight { color: var(--green); font-weight: 600; }
+    .old-text { color: var(--muted); }
+
+    /* --- Summary Cards --- */
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .summary-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 1.25rem; box-shadow: var(--shadow); text-align: center;
+      border-top: 3px solid var(--orange);
+    }
+    .summary-card__label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.25rem; }
+    .summary-card__value { font-size: 1.5rem; font-weight: 700; color: var(--navy); }
+    .summary-card__sub { font-size: 0.75rem; color: var(--green); margin-top: 0.25rem; }
+
+    /* --- Impact bar --- */
+    .impact { display: flex; align-items: center; gap: 0.5rem; }
+    .impact__bar {
+      height: 8px; border-radius: 4px; background: var(--green);
+    }
+    .impact__label { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+
+    /* --- Footer --- */
+    .doc-footer {
+      background: #111; color: #666; text-align: center;
+      padding: 2rem 1.5rem; font-size: 0.75rem;
+    }
+
+    /* --- Responsive table wrapper --- */
+    .table-wrap { overflow-x: auto; margin: 0 -1.5rem; padding: 0 1.5rem; }
+
+    /* Print */
+    @media print {
+      .doc-nav { display: none; }
+      .section { page-break-inside: avoid; }
+      body { font-size: 12px; }
+    }
+
+    @media (max-width: 640px) {
+      .cmp-table { font-size: 0.78rem; }
+      .cmp-table th, .cmp-table td { padding: 0.5rem; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="doc-header">
+    <span class="doc-header__tag">INTERNAL DOCUMENT</span>
+    <h1>LP実装 比較資料：旧実装 vs v5.0</h1>
+    <p>nekoojisan AI業務改善サポート LP — 2026年3月30日作成</p>
+  </header>
+
+  <!-- Nav -->
+  <nav class="doc-nav">
+    <a href="#summary">概要</a>
+    <a href="#css">CSS設計</a>
+    <a href="#animation">アニメーション</a>
+    <a href="#a11y">アクセシビリティ</a>
+    <a href="#security">セキュリティ</a>
+    <a href="#cookie">Cookie/プライバシー</a>
+    <a href="#perf">パフォーマンス</a>
+    <a href="#impact">改善インパクト</a>
+  </nav>
+
+  <!-- Summary -->
+  <section id="summary" class="section">
+    <div class="container">
+      <h2 class="section__title"><span class="section__title-icon">1</span> 改修サマリー</h2>
+      <p class="section__desc">GPT-B v5.0スキルセットに基づき、法人納品レベルの品質へ全面改修しました。</p>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <p class="summary-card__label">セキュリティヘッダー</p>
+          <p class="summary-card__value">5種 → 8種</p>
+          <p class="summary-card__sub">+HSTS / COOP / CORP</p>
+        </div>
+        <div class="summary-card">
+          <p class="summary-card__label">WCAG準拠</p>
+          <p class="summary-card__value">基本 → 2.2 AA</p>
+          <p class="summary-card__sub">法的要件対応</p>
+        </div>
+        <div class="summary-card">
+          <p class="summary-card__label">Cookie同意</p>
+          <p class="summary-card__value">なし → 完全実装</p>
+          <p class="summary-card__sub">GDPR準拠バナー</p>
+        </div>
+        <div class="summary-card">
+          <p class="summary-card__label">CSSトークン</p>
+          <p class="summary-card__value">一部 → 全面</p>
+          <p class="summary-card__sub">clamp() フルード化</p>
+        </div>
+        <div class="summary-card">
+          <p class="summary-card__label">スクロールアニメ</p>
+          <p class="summary-card__value">JS → CSS優先</p>
+          <p class="summary-card__sub">scroll-driven animations</p>
+        </div>
+        <div class="summary-card">
+          <p class="summary-card__label">ホバーエフェクト</p>
+          <p class="summary-card__value">基本 → リッチ</p>
+          <p class="summary-card__sub">3D tilt + spotlight + magnet</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CSS設計 -->
+  <section id="css" class="section">
+    <div class="container">
+      <h2 class="section__title"><span class="section__title-icon">2</span> CSS設計</h2>
+      <p class="section__desc">固定値ベースからフルードデザイントークンへ全面移行。</p>
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr><th class="col-item">項目</th><th class="col-old"><span class="tag tag--old">旧実装</span></th><th class="col-new"><span class="tag tag--new">v5.0</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-item">カラー管理</td>
+              <td><code>#fce4e4</code> 等の手動hex固定値</td>
+              <td><code>color-mix(in oklch, var(--color-error), white 85%)</code> で<span class="new-highlight">動的生成</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">フォントサイズ</td>
+              <td><code>clamp()</code> 一部使用、他は固定rem</td>
+              <td><span class="new-highlight">全8段階</span>を <code>clamp()</code> フルードスケールで定義<br><code>--fs-xs</code> 〜 <code>--fs-hero</code></td>
+            </tr>
+            <tr>
+              <td class="col-item">スペーシング</td>
+              <td><code>16px</code>, <code>32px</code>, <code>48px</code> 固定値</td>
+              <td><span class="new-highlight">全7段階</span>を <code>clamp()</code> で定義<br><code>--sp-xs</code> 〜 <code>--sp-section</code></td>
+            </tr>
+            <tr>
+              <td class="col-item">コンテナ余白</td>
+              <td><code>padding: 0 20px</code> 固定</td>
+              <td><code>padding: 0 clamp(1rem, 3vw, 2rem)</code></td>
+            </tr>
+            <tr>
+              <td class="col-item">イージング</td>
+              <td><code>ease</code>, <code>ease-out</code> 直書き</td>
+              <td>CSS変数で <code>cubic-bezier</code> 定義<br><code>--ease</code>, <code>--ease-out</code></td>
+            </tr>
+            <tr>
+              <td class="col-item">ヒーロー高さ</td>
+              <td><code>min-height: 100vh</code></td>
+              <td><code>min-height: 100dvh</code><br><span class="new-highlight">モバイルアドレスバー対応</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">CSS読み込み</td>
+              <td><code>&lt;link rel="stylesheet"&gt;</code><br>レンダーブロッキング</td>
+              <td><span class="new-highlight">クリティカルCSS inline</span> +<br><code>&lt;link rel="preload"&gt;</code> 非ブロッキング</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- アニメーション -->
+  <section id="animation" class="section">
+    <div class="container">
+      <h2 class="section__title"><span class="section__title-icon">3</span> アニメーション・インタラクション</h2>
+      <p class="section__desc">JS依存からCSS優先へ。ホバーはリッチな3D演出に強化。</p>
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr><th class="col-item">項目</th><th class="col-old"><span class="tag tag--old">旧実装</span></th><th class="col-new"><span class="tag tag--new">v5.0</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-item">スクロール出現</td>
+              <td>IntersectionObserver のみ<br>（JSメインスレッド処理）</td>
+              <td><span class="new-highlight">CSS scroll-driven animations 優先</span><br>（GPU処理、メインスレッド非ブロッキング）<br>+ IOフォールバック</td>
+            </tr>
+            <tr>
+              <td class="col-item">カードホバー</td>
+              <td><code>translateY(-4px)</code> + <code>box-shadow</code> 変化</td>
+              <td><span class="new-highlight">3D Tilt</span>（perspective + rotateX/Y + scale）<br>マウス位置に連動して傾斜</td>
+            </tr>
+            <tr>
+              <td class="col-item">ヒーロー演出</td>
+              <td>なし</td>
+              <td><span class="new-highlight">カーソルスポットライト</span><br>マウス追従のradial-gradient</td>
+            </tr>
+            <tr>
+              <td class="col-item">CTAボタン</td>
+              <td>通常の <code>:hover</code></td>
+              <td><span class="new-highlight">マグネットボタン</span><br><code>data-magnet</code> でカーソルに吸い寄せ</td>
+            </tr>
+            <tr>
+              <td class="col-item">reduced-motion</td>
+              <td><span class="tag tag--none">未対応</span></td>
+              <td><span class="new-highlight">全アニメーション無効化</span><br><code>@media (prefers-reduced-motion: reduce)</code></td>
+            </tr>
+            <tr>
+              <td class="col-item">実装方式</td>
+              <td><code>.fade-in</code> + <code>.is-visible</code><br>（IO検知 → クラス追加）</td>
+              <td><code>.scroll-reveal</code> +<br><code>@supports (animation-timeline: view())</code><br>で自動分岐</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- アクセシビリティ -->
+  <section id="a11y" class="section">
+    <div class="container">
+      <h2 class="section__title"><span class="section__title-icon">4</span> アクセシビリティ（WCAG）</h2>
+      <p class="section__desc">基本HTMLから WCAG 2.2 Level AA 準拠へ。EU EAA 法的義務にも対応。</p>
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr><th class="col-item">項目</th><th class="col-old"><span class="tag tag--old">旧実装</span></th><th class="col-new"><span class="tag tag--new">v5.0</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-item">準拠レベル</td>
+              <td>明示的対応なし</td>
+              <td><span class="new-highlight">WCAG 2.2 AA</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">スキップリンク</td>
+              <td><span class="tag tag--none">なし</span></td>
+              <td><code>&lt;a class="skip-link"&gt;</code><br>メインコンテンツへスキップ</td>
+            </tr>
+            <tr>
+              <td class="col-item">フォーカス表示</td>
+              <td>ブラウザデフォルト</td>
+              <td><code>:focus-visible</code> カスタムリング<br><code>:focus:not(:focus-visible)</code> マウス時非表示</td>
+            </tr>
+            <tr>
+              <td class="col-item">タッチターゲット</td>
+              <td>未制御</td>
+              <td>全ボタン・リンク<br><span class="new-highlight">min-height: 44px / min-width: 44px</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">ハンバーガー</td>
+              <td><code>aria-label</code> のみ</td>
+              <td><code>aria-label</code> + <code>aria-expanded</code> 動的切替</td>
+            </tr>
+            <tr>
+              <td class="col-item">フォーム</td>
+              <td>基本的な <code>label</code>/<code>for</code></td>
+              <td><code>aria-required</code> + <code>autocomplete</code> +<br><code>.sr-only</code>（必須表記の読み上げ対応）</td>
+            </tr>
+            <tr>
+              <td class="col-item">ランドマーク</td>
+              <td><code>&lt;header&gt;</code>, <code>&lt;main&gt;</code> のみ</td>
+              <td><code>role="banner"</code>, <code>role="navigation"</code>,<br><code>aria-label</code>, <code>role="contentinfo"</code></td>
+            </tr>
+            <tr>
+              <td class="col-item">装飾SVG</td>
+              <td><code>aria-hidden</code> なし</td>
+              <td>全装飾SVGに <code>aria-hidden="true"</code></td>
+            </tr>
+            <tr>
+              <td class="col-item">&lt;main&gt;</td>
+              <td><code>tabindex</code> なし</td>
+              <td><code>tabindex="-1"</code>（スキップリンク先）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- セキュリティ -->
+  <section id="security" class="section">
+    <div class="container">
+      <h2 class="section__title"><span class="section__title-icon">5</span> セキュリティヘッダー</h2>
+      <p class="section__desc">法人案件区分Bに準拠した8種のフルセキュリティヘッダー。</p>
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr><th class="col-item">ヘッダー</th><th class="col-old"><span class="tag tag--old">旧実装</span></th><th class="col-new"><span class="tag tag--new">v5.0</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-item">Strict-Transport-Security</td>
+              <td><span class="tag tag--none">なし</span></td>
+              <td><span class="new-highlight">max-age=63072000; includeSubDomains; preload</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">Cross-Origin-Opener-Policy</td>
+              <td><span class="tag tag--none">なし</span></td>
+              <td><span class="new-highlight">same-origin</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">Cross-Origin-Resource-Policy</td>
+              <td><span class="tag tag--none">なし</span></td>
+              <td><span class="new-highlight">same-origin</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">X-XSS-Protection</td>
+              <td><code>1; mode=block</code><br><span class="old-text">（非推奨ヘッダー）</span></td>
+              <td><span class="new-highlight">削除</span>（CSPで代替）</td>
+            </tr>
+            <tr>
+              <td class="col-item">Content-Security-Policy</td>
+              <td>基本設定<br><code>frame-ancestors 'none'</code></td>
+              <td>+ <code>base-uri 'self'</code><br>+ <code>form-action 'self'</code><br>+ <code>upgrade-insecure-requests</code><br>+ GA/analytics ドメイン許可</td>
+            </tr>
+            <tr>
+              <td class="col-item">Permissions-Policy</td>
+              <td>camera, microphone, geolocation</td>
+              <td>+ <span class="new-highlight">payment=(), usb=()</span> 追加</td>
+            </tr>
+            <tr>
+              <td class="col-item">X-Frame-Options</td>
+              <td><span class="tag tag--same">DENY</span></td>
+              <td><span class="tag tag--same">変更なし</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">X-Content-Type-Options</td>
+              <td><span class="tag tag--same">nosniff</span></td>
+              <td><span class="tag tag--same">変更なし</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cookie/プライバシー -->
+  <section id="cookie" class="section">
+    <div class="container">
+      <h2 class="section__title"><span class="section__title-icon">6</span> Cookie同意・プライバシー</h2>
+      <p class="section__desc">GDPR準拠のCookie同意バナーを新規実装。GA読み込みを同意後に制御。</p>
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr><th class="col-item">項目</th><th class="col-old"><span class="tag tag--old">旧実装</span></th><th class="col-new"><span class="tag tag--new">v5.0</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-item">Cookie同意バナー</td>
+              <td><span class="tag tag--none">なし</span></td>
+              <td><span class="new-highlight">完全実装</span><br>拒否/許可ボタン同等表示（GDPR準拠）<br><code>role="dialog"</code> + <code>aria-label</code></td>
+            </tr>
+            <tr>
+              <td class="col-item">GA読み込み</td>
+              <td>常時 or 未設定</td>
+              <td><span class="new-highlight">同意後のみ条件読み込み</span><br><code>loadGA()</code> を consent 後に実行</td>
+            </tr>
+            <tr>
+              <td class="col-item">同意記録</td>
+              <td><span class="tag tag--none">なし</span></td>
+              <td><code>localStorage</code> + タイムスタンプ保存</td>
+            </tr>
+            <tr>
+              <td class="col-item">プライバシーポリシー</td>
+              <td>基本7項目</td>
+              <td>Cookie同意連携記述 +<br>GA オプトアウト説明 +<br>「同意前は読み込まない」旨の明記</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- パフォーマンス -->
+  <section id="perf" class="section">
+    <div class="container">
+      <h2 class="section__title"><span class="section__title-icon">7</span> パフォーマンス</h2>
+      <p class="section__desc">クリティカルCSS分離、Variable Font、GPU委譲でCore Web Vitals改善。</p>
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr><th class="col-item">項目</th><th class="col-old"><span class="tag tag--old">旧実装</span></th><th class="col-new"><span class="tag tag--new">v5.0</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-item">CSS配信</td>
+              <td>通常の <code>&lt;link&gt;</code><br>（レンダーブロッキング）</td>
+              <td><span class="new-highlight">クリティカルCSS inline</span><br>+ <code>&lt;link rel="preload"&gt;</code> 非ブロッキング</td>
+            </tr>
+            <tr>
+              <td class="col-item">フォント</td>
+              <td><code>wght@400;700</code><br>（2ウェイト個別読み込み）</td>
+              <td><span class="new-highlight">Variable Font</span> <code>wght@400..700</code><br>（1リクエストで全ウェイト）</td>
+            </tr>
+            <tr>
+              <td class="col-item">JS配信</td>
+              <td><code>&lt;script defer&gt;</code></td>
+              <td><code>&lt;script defer&gt;</code><br>+ <code>passive: true</code> イベントリスナー</td>
+            </tr>
+            <tr>
+              <td class="col-item">スクロール監視</td>
+              <td>IntersectionObserver 常時使用<br>（JSメインスレッド）</td>
+              <td>CSS scroll-driven animations<br><span class="new-highlight">GPUで処理、INP改善</span></td>
+            </tr>
+            <tr>
+              <td class="col-item">GPU最適化</td>
+              <td>特になし</td>
+              <td><code>will-change: transform</code><br><code>transform-style: preserve-3d</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 改善インパクト -->
+  <section id="impact" class="section">
+    <div class="container">
+      <h2 class="section__title"><span class="section__title-icon">8</span> 改善インパクト総括</h2>
+      <p class="section__desc">各カテゴリの改善度を可視化。</p>
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr><th style="width:30%">カテゴリ</th><th style="width:15%">旧</th><th style="width:15%">v5.0</th><th style="width:40%">改善度</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600">デザイントークン管理</td>
+              <td>一部CSS変数</td>
+              <td>全値フルード化</td>
+              <td><div class="impact"><div class="impact__bar" style="width:100%"></div><div class="impact__label">★★★</div></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600">モダンCSS活用</td>
+              <td>なし</td>
+              <td>scroll-driven / color-mix / dvh</td>
+              <td><div class="impact"><div class="impact__bar" style="width:100%"></div><div class="impact__label">★★★</div></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600">インタラクション</td>
+              <td>基本hover</td>
+              <td>3D tilt + spotlight + magnet</td>
+              <td><div class="impact"><div class="impact__bar" style="width:100%"></div><div class="impact__label">★★★</div></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600">アクセシビリティ</td>
+              <td>基本HTML</td>
+              <td>WCAG 2.2 AA</td>
+              <td><div class="impact"><div class="impact__bar" style="width:100%"></div><div class="impact__label">★★★</div></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600">セキュリティヘッダー</td>
+              <td>5種</td>
+              <td>8種（法人フルセット）</td>
+              <td><div class="impact"><div class="impact__bar" style="width:66%"></div><div class="impact__label">★★☆</div></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600">Cookie / プライバシー</td>
+              <td>未対応</td>
+              <td>GDPR準拠バナー + GA条件読込</td>
+              <td><div class="impact"><div class="impact__bar" style="width:100%"></div><div class="impact__label">★★★</div></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600">パフォーマンス最適化</td>
+              <td>基本</td>
+              <td>クリティカルCSS + VF + GPU</td>
+              <td><div class="impact"><div class="impact__bar" style="width:66%"></div><div class="impact__label">★★☆</div></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600">prefers-reduced-motion</td>
+              <td>未対応</td>
+              <td>全アニメーション対応</td>
+              <td><div class="impact"><div class="impact__bar" style="width:100%"></div><div class="impact__label">★★★</div></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background:var(--navy);color:var(--white);border-radius:var(--radius);padding:1.5rem 2rem;margin-top:2rem;font-size:0.9rem;line-height:1.8;">
+        <strong style="color:var(--orange);">結論：</strong>旧実装は「動くLP」として機能していましたが、v5.0は<strong>法人納品レベルのセキュリティ・アクセシビリティ・パフォーマンス</strong>を標準装備。GPT-B v5.0スキルにより、今後の案件でも同等品質を再現可能です。
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="doc-footer">
+    <p>&copy; 2026 nekoojisan — This document is for internal use only.</p>
+  </footer>
+
+</body>
+</html>
