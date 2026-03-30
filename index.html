@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI業務効率改善サポート | nekoojisan - 中小企業専門</title>
+  <meta name="description" content="中小企業向けAI業務改善の伴走支援。業務棚卸しから導入設計、プロンプト整備、社内研修まで。3ヶ月で現場にAIを定着させます。">
+
+  <!-- OGP -->
+  <meta property="og:title" content="AI業務効率改善サポート | nekoojisan">
+  <meta property="og:description" content="中小企業向けAI業務改善の伴走支援。業務棚卸しから導入設計、プロンプト整備、社内研修まで。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/og-image.svg">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts: Variable Fonts (single request, wght 400..700) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400..700&display=swap" rel="stylesheet">
+
+  <!-- Critical CSS (inline) -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"Noto Sans JP",ui-sans-serif,system-ui,sans-serif;line-height:1.8;color:#2c3e50;background:#f8f9fa;overflow-x:hidden}
+    img{max-width:100%;height:auto;display:block}
+    .skip-link{position:absolute;top:-100%;left:1rem;background:#e67e22;color:#fff;padding:.75rem 1.5rem;border-radius:.5rem;font-weight:700;z-index:10000;text-decoration:none}
+    .skip-link:focus{top:1rem}
+    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(26,39,68,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+    .header__inner{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1100px;margin:0 auto;padding:0 clamp(1rem,3vw,2rem)}
+    .hero{position:relative;min-height:100dvh;display:flex;align-items:center;background:linear-gradient(135deg,#1a2744 0%,#0f1a2e 50%,#162038 100%);color:#fff;overflow:hidden;padding-top:60px}
+    .container{width:100%;max-width:1100px;margin:0 auto;padding:0 clamp(1rem,3vw,2rem)}
+  </style>
+
+  <!-- Main CSS (non-blocking) -->
+  <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+
+  <!-- Structured Data: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "nekoojisan AI業務改善サポート",
+    "description": "中小企業向けAI業務改善の伴走支援",
+    "url": "https://nekoojisan-ai-consulting-lp.netlify.app",
+    "serviceType": "AI業務効率改善コンサルティング"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Skip Link (WCAG 2.2) -->
+  <a href="#main" class="skip-link">メインコンテンツへスキップ</a>
+
+  <!-- ========== Header ========== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="#" class="header__logo"><span>nekoojisan</span> | AI業務改善</a>
+      <nav class="nav" role="navigation" aria-label="メインナビゲーション">
+        <ul class="nav__list">
+          <li><a href="#problems" class="nav__link">よくある悩み</a></li>
+          <li><a href="#features" class="nav__link">サービス</a></li>
+          <li><a href="#cases" class="nav__link">導入事例</a></li>
+          <li><a href="#pricing" class="nav__link">料金</a></li>
+          <li><a href="#faq" class="nav__link">FAQ</a></li>
+          <li><a href="#contact" class="nav__link">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" type="button">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" role="main" tabindex="-1">
+
+  <!-- ========== S1: Hero ========== -->
+  <section id="hero" class="hero">
+    <div class="hero__pattern"></div>
+    <div class="hero__grid"></div>
+    <div class="cursor-spotlight" aria-hidden="true"></div>
+    <div class="container hero__content">
+      <h1 class="hero__title">AIを入れたい。でも、現場で回らない。</h1>
+      <span class="hero__accent">——その悩み、解決します。</span>
+      <p class="hero__desc">ツール紹介で終わらない。あなたの業務に合わせて設計し、現場で回る形まで落とします。中小企業専門のAI業務改善パートナー。</p>
+      <div class="hero__buttons">
+        <a href="#contact" class="btn btn--accent" data-magnet>無料で相談する</a>
+        <a href="https://line.me/R/ti/p/XXXXX" class="btn btn--outline" target="_blank" rel="noopener noreferrer">LINE で相談する</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== S2: Problems ========== -->
+  <section id="problems" class="section">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">こんな悩み、ありませんか？</h2>
+      <div class="problems__list">
+        <div class="problems__item scroll-reveal">
+          <svg class="problems__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          <p>AIを導入したいけど、何から始めればいいかわからない</p>
+        </div>
+        <div class="problems__item scroll-reveal">
+          <svg class="problems__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          <p>ChatGPTを契約したが、社内で誰も使っていない</p>
+        </div>
+        <div class="problems__item scroll-reveal">
+          <svg class="problems__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          <p>資料作成・議事録・メール対応に毎日追われている</p>
+        </div>
+        <div class="problems__item scroll-reveal">
+          <svg class="problems__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          <p>外注に頼りすぎてコストが膨らんでいる</p>
+        </div>
+        <div class="problems__item scroll-reveal">
+          <svg class="problems__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          <p>「AI導入しよう」と号令を出したが、現場が動かない</p>
+        </div>
+      </div>
+      <p class="problems__summary scroll-reveal">全部、よくある話です。そしてどれも、ツールの問題じゃなく "進め方" の問題です。</p>
+    </div>
+  </section>
+
+  <!-- ========== S3: Features ========== -->
+  <section id="features" class="section section--alt">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">AI業務効率改善サポート</h2>
+      <p class="section__subtitle scroll-reveal">あなたの会社の業務を整理し、AIをどこに入れるべきかを決め、実際に使える形まで伴走します。</p>
+      <div class="features__grid">
+        <div class="features__card tilt-card scroll-reveal">
+          <svg class="features__card-icon" viewBox="0 0 56 56" fill="none" aria-hidden="true"><circle cx="28" cy="28" r="26" stroke="#e67e22" stroke-width="2"/><circle cx="28" cy="24" r="8" stroke="#1a2744" stroke-width="2"/><path d="M18 38c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#1a2744" stroke-width="2" fill="none"/><line x1="36" y1="20" x2="44" y2="12" stroke="#e67e22" stroke-width="2"/></svg>
+          <h3 class="features__card-title">業務棚卸しから始める</h3>
+          <p class="features__card-text">ツール先行ではなく、まず業務の無駄を可視化。どこにAIを入れるべきかを明確にします。</p>
+        </div>
+        <div class="features__card tilt-card scroll-reveal">
+          <svg class="features__card-icon" viewBox="0 0 56 56" fill="none" aria-hidden="true"><circle cx="28" cy="28" r="26" stroke="#e67e22" stroke-width="2"/><circle cx="28" cy="28" r="8" stroke="#1a2744" stroke-width="2"/><path d="M28 20V12M28 44v-8M36 28h8M12 28h8" stroke="#1a2744" stroke-width="2"/><path d="M33 23l5-5M18 38l5-5M33 33l5 5M18 18l5 5" stroke="#e67e22" stroke-width="1.5"/></svg>
+          <h3 class="features__card-title">現場で回る形まで落とす</h3>
+          <p class="features__card-text">プロンプト整備・運用ルール・社内研修まで対応。"導入して終わり"にしません。</p>
+        </div>
+        <div class="features__card tilt-card scroll-reveal">
+          <svg class="features__card-icon" viewBox="0 0 56 56" fill="none" aria-hidden="true"><circle cx="28" cy="28" r="26" stroke="#e67e22" stroke-width="2"/><path d="M20 30c0 0 3-4 8-4s8 4 8 4" stroke="#1a2744" stroke-width="2" fill="none"/><path d="M16 24l4 4 4-4" stroke="#1a2744" stroke-width="2" fill="none"/><path d="M32 24l4 4 4-4" stroke="#1a2744" stroke-width="2" fill="none"/></svg>
+          <h3 class="features__card-title">3ヶ月の伴走型</h3>
+          <p class="features__card-text">導入して終わりではなく、定着するまでサポート。月次レポートで進捗を可視化します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== S4: Services ========== -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">具体的にやること</h2>
+      <div class="services__grid">
+        <div class="services__item scroll-reveal">
+          <svg class="services__item-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span>業務棚卸し＆AI導入ポイント選定</span>
+        </div>
+        <div class="services__item scroll-reveal">
+          <svg class="services__item-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span>実務フローの改善設計</span>
+        </div>
+        <div class="services__item scroll-reveal">
+          <svg class="services__item-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span>プロンプト作成・整備</span>
+        </div>
+        <div class="services__item scroll-reveal">
+          <svg class="services__item-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span>社内向け活用ルール策定</span>
+        </div>
+        <div class="services__item scroll-reveal">
+          <svg class="services__item-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span>必要に応じた研修実施</span>
+        </div>
+        <div class="services__item scroll-reveal">
+          <svg class="services__item-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span>動画・発信の効率化支援</span>
+        </div>
+      </div>
+      <p class="services__note scroll-reveal">すべてを一度にやるのではなく、御社の優先度に合わせて進めます。</p>
+    </div>
+  </section>
+
+  <!-- ========== S5: Cases ========== -->
+  <section id="cases" class="section section--alt">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">導入企業の変化</h2>
+      <div class="cases__grid">
+        <div class="cases__card tilt-card scroll-reveal">
+          <p class="cases__card-label">導入事例 01</p>
+          <h3 class="cases__card-title">資料作成</h3>
+          <div class="cases__card-comparison">
+            <span class="cases__card-before">月20時間</span>
+            <span class="cases__card-arrow" aria-hidden="true">→</span>
+            <span class="cases__card-after">月5時間</span>
+          </div>
+          <p class="cases__card-desc">テンプレート化とAI自動生成で大幅削減</p>
+        </div>
+        <div class="cases__card tilt-card scroll-reveal">
+          <p class="cases__card-label">導入事例 02</p>
+          <h3 class="cases__card-title">議事録作成</h3>
+          <div class="cases__card-comparison">
+            <span class="cases__card-before">会議後2時間</span>
+            <span class="cases__card-arrow" aria-hidden="true">→</span>
+            <span class="cases__card-after">会議後5分</span>
+          </div>
+          <p class="cases__card-desc">音声認識＋AI要約で即共有</p>
+        </div>
+        <div class="cases__card tilt-card scroll-reveal">
+          <p class="cases__card-label">導入事例 03</p>
+          <h3 class="cases__card-title">社内問い合わせ対応</h3>
+          <div class="cases__card-comparison">
+            <span class="cases__card-before">対応工数100%</span>
+            <span class="cases__card-arrow" aria-hidden="true">→</span>
+            <span class="cases__card-after">対応工数30%</span>
+          </div>
+          <p class="cases__card-desc">社内AIチャットボットで自動回答</p>
+        </div>
+      </div>
+      <p class="cases__note scroll-reveal">※ 導入企業の許可を得て、概要を掲載しています</p>
+    </div>
+  </section>
+
+  <!-- ========== S6: Target ========== -->
+  <section id="target" class="section">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">こんな会社に向いています</h2>
+      <div class="target__grid scroll-reveal">
+        <div class="target__col target__col--yes">
+          <h3 class="target__col-title">向いている</h3>
+          <div class="target__item"><svg class="target__item-icon target__item-icon--yes" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg><span>社員5〜50名の中小企業</span></div>
+          <div class="target__item"><svg class="target__item-icon target__item-icon--yes" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg><span>社長が現場も見ている</span></div>
+          <div class="target__item"><svg class="target__item-icon target__item-icon--yes" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg><span>少人数で生産性を上げたい</span></div>
+          <div class="target__item"><svg class="target__item-icon target__item-icon--yes" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg><span>AIに興味はあるが進め方がわからない</span></div>
+        </div>
+        <div class="target__col target__col--no">
+          <h3 class="target__col-title">向いていない</h3>
+          <div class="target__item"><svg class="target__item-icon target__item-icon--no" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg><span>情報収集だけしたい</span></div>
+          <div class="target__item"><svg class="target__item-icon target__item-icon--no" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg><span>とりあえず流行りで試したい</span></div>
+          <div class="target__item"><svg class="target__item-icon target__item-icon--no" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg><span>実行する気がない</span></div>
+        </div>
+      </div>
+      <p class="target__cta scroll-reveal">本気で業務を変えたい会社だけ、来てください。</p>
+    </div>
+  </section>
+
+  <!-- ========== S7: Pricing ========== -->
+  <section id="pricing" class="section section--dark">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">料金プラン</h2>
+      <div class="pricing__card scroll-reveal">
+        <p class="pricing__card-plan">PLAN</p>
+        <h3 class="pricing__card-name">AI業務効率改善サポート</h3>
+        <p class="pricing__card-duration">期間：3ヶ月</p>
+        <p class="pricing__card-price">75万円〜<span>（税別）</span></p>
+        <p class="pricing__card-note">内容に応じて調整いたします</p>
+        <ul class="pricing__card-list">
+          <li>業務棚卸し</li>
+          <li>導入設計</li>
+          <li>プロンプト整備</li>
+          <li>運用ルール策定</li>
+          <li>月次レポート</li>
+          <li>チャットサポート</li>
+        </ul>
+        <a href="#contact" class="btn btn--accent" data-magnet>まずは無料相談から</a>
+      </div>
+      <p class="pricing__footnote scroll-reveal">月額換算で約25万円。業務改善で削減できるコストと比較してみてください。</p>
+    </div>
+  </section>
+
+  <!-- ========== S8: Steps ========== -->
+  <section id="steps" class="section">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">ご利用の流れ</h2>
+      <div class="steps__timeline">
+        <div class="steps__item scroll-reveal">
+          <div class="steps__number" aria-hidden="true">1</div>
+          <div class="steps__content"><h3 class="steps__content-title">無料相談（30分）</h3><p class="steps__content-desc">現状と課題をヒアリング</p></div>
+        </div>
+        <div class="steps__item scroll-reveal">
+          <div class="steps__number" aria-hidden="true">2</div>
+          <div class="steps__content"><h3 class="steps__content-title">提案書作成</h3><p class="steps__content-desc">御社に最適なプランを設計</p></div>
+        </div>
+        <div class="steps__item scroll-reveal">
+          <div class="steps__number" aria-hidden="true">3</div>
+          <div class="steps__content"><h3 class="steps__content-title">契約・キックオフ</h3><p class="steps__content-desc">業務棚卸しからスタート</p></div>
+        </div>
+        <div class="steps__item scroll-reveal">
+          <div class="steps__number" aria-hidden="true">4</div>
+          <div class="steps__content"><h3 class="steps__content-title">月次レポート</h3><p class="steps__content-desc">改善の進捗を可視化</p></div>
+        </div>
+        <div class="steps__item scroll-reveal">
+          <div class="steps__number" aria-hidden="true">5</div>
+          <div class="steps__content"><h3 class="steps__content-title">定着サポート</h3><p class="steps__content-desc">社内で自走できる状態まで</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== S9: Profile ========== -->
+  <section id="profile" class="section section--alt">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">サポート担当</h2>
+      <div class="profile__inner scroll-reveal">
+        <div class="profile__image" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="14" stroke="#999" stroke-width="2"/><path d="M16 68c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="#999" stroke-width="2"/></svg>
+        </div>
+        <div class="profile__text">
+          <h3 class="profile__name">nekoojisan</h3>
+          <p class="profile__role">AI活用コンサルタント / コンテンツクリエイター</p>
+          <p class="profile__desc">AIの専門家ではなく、業務改善の専門家です。AIはそのための道具。中小企業が少人数でも生産性を上げられるよう、現場目線で伴走します。</p>
+          <div class="profile__tags">
+            <span class="profile__tag">法人向けAI導入支援</span>
+            <span class="profile__tag">社内研修</span>
+            <span class="profile__tag">業務自動化</span>
+            <span class="profile__tag">コンテンツ制作</span>
+          </div>
+          <div class="profile__sns">
+            <a href="#" aria-label="Threads"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.58-3.599 1.009-4.793-.29-.607-.755-1.118-1.286-1.49a8.853 8.853 0 01-.349 2.2c-.526 1.643-1.45 2.74-2.746 3.262-1.073.432-2.32.486-3.503.151-1.31-.37-2.349-1.202-2.927-2.34-.508-.998-.67-2.22-.456-3.44.432-2.47 2.09-4.076 4.328-4.198a5.07 5.07 0 012.377.329c.063-.948.073-1.915.027-2.879l2.06-.126c.067 1.378.03 2.675-.11 3.927.626.486 1.11 1.122 1.42 1.868.85 2.05.655 4.77-1.547 6.922-1.775 1.736-4.026 2.498-7.093 2.519z"/></svg></a>
+            <a href="#" aria-label="X（Twitter）"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" aria-label="note"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10zM8 8v8h2v-3h2c1.657 0 3-1.343 3-3s-1.343-3-3-3H8zm2 3V10h2a1 1 0 110 2h-2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== S10: FAQ ========== -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">よくある質問</h2>
+      <div class="faq__list">
+        <details class="faq__item scroll-reveal">
+          <summary>IT知識がなくても大丈夫ですか？</summary>
+          <div class="faq__answer"><p>はい。専門用語を使わず、わかりやすく進めます。</p></div>
+        </details>
+        <details class="faq__item scroll-reveal">
+          <summary>どんなAIツールを使いますか？</summary>
+          <div class="faq__answer"><p>ChatGPT、Claude、Geminiなど。御社の業務に最適なものを選定します。</p></div>
+        </details>
+        <details class="faq__item scroll-reveal">
+          <summary>リモートでも対応できますか？</summary>
+          <div class="faq__answer"><p>オンライン完結で全国対応しています。</p></div>
+        </details>
+        <details class="faq__item scroll-reveal">
+          <summary>3ヶ月で成果は出ますか？</summary>
+          <div class="faq__answer"><p>最初の1ヶ月で小さな成果を出し、3ヶ月で定着を目指します。</p></div>
+        </details>
+        <details class="faq__item scroll-reveal">
+          <summary>研修だけの依頼もできますか？</summary>
+          <div class="faq__answer"><p>単発研修プランもご用意しています。お気軽にご相談ください。</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== S11: CTA + Form ========== -->
+  <section id="contact" class="section section--dark">
+    <div class="container">
+      <h2 class="section__title scroll-reveal">まずは無料相談から</h2>
+      <p class="section__subtitle scroll-reveal">現状をお聞きして、何を優先すべきか整理します。営業はしません。合わなければ、それでOKです。</p>
+      <div class="cta__grid">
+        <div id="form-wrapper" class="scroll-reveal">
+          <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="contact">
+            <div class="cta__form-honeypot" aria-hidden="true">
+              <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <input type="hidden" id="form-timestamp" name="timestamp" value="">
+            <div class="cta__form-group">
+              <label for="company" class="cta__form-label">会社名</label>
+              <input type="text" id="company" name="company" class="cta__form-input" placeholder="株式会社○○" autocomplete="organization">
+            </div>
+            <div class="cta__form-group">
+              <label for="name" class="cta__form-label">お名前<span class="required" aria-hidden="true">*</span><span class="sr-only">（必須）</span></label>
+              <input type="text" id="name" name="name" class="cta__form-input" required aria-required="true" placeholder="山田 太郎" autocomplete="name">
+            </div>
+            <div class="cta__form-group">
+              <label for="email" class="cta__form-label">メールアドレス<span class="required" aria-hidden="true">*</span><span class="sr-only">（必須）</span></label>
+              <input type="email" id="email" name="email" class="cta__form-input" required aria-required="true" placeholder="info@example.com" autocomplete="email">
+            </div>
+            <div class="cta__form-group">
+              <label for="message" class="cta__form-label">今いちばん重い業務</label>
+              <textarea id="message" name="message" class="cta__form-textarea" placeholder="例：毎月の報告書作成に20時間かかっている"></textarea>
+            </div>
+            <button type="submit" class="btn btn--accent" data-magnet style="width:100%">相談する</button>
+          </form>
+        </div>
+        <div id="form-success" class="cta__form-success" role="status">
+          <div class="cta__form-success-icon" aria-hidden="true">&#10003;</div>
+          <p class="cta__form-success-title">送信完了しました</p>
+          <p>2営業日以内にご連絡いたします。</p>
+        </div>
+        <div class="cta__line scroll-reveal">
+          <h3 class="cta__line-title">LINEでも相談できます</h3>
+          <div class="cta__line-qr" aria-label="LINE公式QRコード">QR CODE</div>
+          <a href="https://line.me/R/ti/p/XXXXX" class="btn btn--outline" target="_blank" rel="noopener noreferrer" data-magnet>LINE で相談する</a>
+          <p class="cta__line-note">チャットで気軽にご相談ください</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ========== Footer ========== -->
+  <footer class="section--footer footer" role="contentinfo">
+    <div class="container">
+      <nav class="footer__links" aria-label="フッターナビゲーション">
+        <a href="privacy.html" class="footer__link">プライバシーポリシー</a>
+        <a href="#" class="footer__link">特定商取引法に基づく表記</a>
+      </nav>
+      <div class="footer__sns">
+        <a href="#" aria-label="Threads"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.58-3.599 1.009-4.793-.29-.607-.755-1.118-1.286-1.49a8.853 8.853 0 01-.349 2.2c-.526 1.643-1.45 2.74-2.746 3.262-1.073.432-2.32.486-3.503.151-1.31-.37-2.349-1.202-2.927-2.34-.508-.998-.67-2.22-.456-3.44.432-2.47 2.09-4.076 4.328-4.198a5.07 5.07 0 012.377.329c.063-.948.073-1.915.027-2.879l2.06-.126c.067 1.378.03 2.675-.11 3.927.626.486 1.11 1.122 1.42 1.868.85 2.05.655 4.77-1.547 6.922-1.775 1.736-4.026 2.498-7.093 2.519z"/></svg></a>
+        <a href="#" aria-label="X（Twitter）"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="note"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10zM8 8v8h2v-3h2c1.657 0 3-1.343 3-3s-1.343-3-3-3H8zm2 3V10h2a1 1 0 110 2h-2z"/></svg></a>
+      </div>
+      <p class="footer__copy">&copy; 2026 nekoojisan</p>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent" class="cookie-consent" role="dialog" aria-label="Cookie設定">
+    <div class="cookie-consent__inner">
+      <p class="cookie-consent__text">当サイトではサービス向上のためCookieを使用しています。<a href="privacy.html">プライバシーポリシー</a></p>
+      <div class="cookie-consent__actions">
+        <button type="button" class="cookie-consent__btn cookie-consent__btn--reject" data-cookie="reject">拒否する</button>
+        <button type="button" class="cookie-consent__btn cookie-consent__btn--accept" data-cookie="accept">すべて許可</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS (defer) -->
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>

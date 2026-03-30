@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2744"/>
+      <stop offset="100%" style="stop-color:#0f1a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="250" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="52" font-weight="bold">AI業務効率改善サポート</text>
+  <text x="600" y="330" text-anchor="middle" fill="#e67e22" font-family="sans-serif" font-size="30">AIを入れたい。でも、現場で回らない。</text>
+  <text x="600" y="400" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="sans-serif" font-size="22">——その悩み、解決します。</text>
+  <text x="600" y="520" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="sans-serif" font-size="20">nekoojisan | 中小企業専門</text>
+</svg>
